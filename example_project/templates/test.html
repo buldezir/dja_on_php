@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <h1>Test</h1>
+    <p class="important">
+        {{ request.getHeader('Accept') }}
+		<br/>
+		{{ config.TEMPLATE_CACHE_DIR }}
+    </p>
+{% endblock %}
