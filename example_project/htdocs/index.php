@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 define('HTDOCS_PATH', realpath(dirname(__FILE__)));
 define('LIBRARY_PATH', realpath(HTDOCS_PATH.'/../../library'));
 
+############ THIS IS NOT NEEDED IF U SUCCESSFULLY RUN PROJECT ONCE ##################
 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
     echo '<h1>U need PHP version 5.3 or newer to use this wramework</h1>'; exit;
 }
@@ -28,6 +29,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [QSA]";
 	file_put_contents(HTDOCS_PATH.'/.htaccess', $htaccess);
 }
+$tplCacheDir = realpath(HTDOCS_PATH.'/../../example_project').'/templates/_cache';
+if (!file_exits($tplCacheDir) {
+	mkdir($tplCacheDir, 0777);
+}
+############### END ################################################################
 
 // edit for yours place:
 require LIBRARY_PATH . '/Dja/Loader.php';
@@ -51,16 +57,12 @@ function qprofile()
     $s .= '</ol>';
     return $s;
 }
-function count_iter(Iterator $iterator)
-{
-	$c = 0;
-	foreach ($iterator as $f) { if (!$f->isDot()) $c++; }
-	return $c;
-}
 function dir_is_empty($dir)
 {
 	$dir = new DirectoryIterator($dir);
-	return count_iter($dir) === 0;
+	$c = 0;
+	foreach ($dir as $f) { if (!$f->isDot()) $c++; }
+	return $c === 0;
 }
 
 echo '<br/><p>memory usage: '.round(memory_get_usage()/1000,3).' kb < '.round(memory_get_peak_usage()/1000,3).' kb</p>';

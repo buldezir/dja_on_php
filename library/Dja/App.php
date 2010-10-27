@@ -122,6 +122,9 @@ class Dja_App extends Dja_Singleton
         }
     }
     
+    /**
+     * @todo: better error check & exceptions catch & logging
+     */
     protected function _initModels()
     {
         if ($this->_config->AUTO_INIT_MODELS !== true) return;
