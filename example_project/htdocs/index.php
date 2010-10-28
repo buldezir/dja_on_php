@@ -10,13 +10,13 @@ define('LIBRARY_PATH', realpath(HTDOCS_PATH.'/../../library'));
 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
     echo '<h1>U need PHP version 5.3 or newer to use this wramework</h1>'; exit;
 }
-if (dir_is_empty(LIBRARY_PATH . '/Zend')) {
+if (!file_exists(LIBRARY_PATH . '/Zend') || dir_is_empty(LIBRARY_PATH . '/Zend')) {
 	echo '<h1>Put Zend framework Library contents in library/Zend</h1>'; exit;
 }
-if (dir_is_empty(LIBRARY_PATH . '/Twig')) {
+if (!file_exists(LIBRARY_PATH . '/Twig') || dir_is_empty(LIBRARY_PATH . '/Twig')) {
 	echo '<h1>Put Twig library contents in library/Twig</h1>'; exit;
 }
-if (!file_exits(HTDOCS_PATH.'/.htaccess')) {
+if (!file_exists(HTDOCS_PATH.'/.htaccess')) {
 	$htaccess = "AddDefaultCharset utf-8
 RewriteEngine On
 RewriteBase /
@@ -30,7 +30,7 @@ RewriteRule ^(.*)$ index.php/$1 [QSA]";
 	file_put_contents(HTDOCS_PATH.'/.htaccess', $htaccess);
 }
 $tplCacheDir = realpath(HTDOCS_PATH.'/../../example_project').'/templates/_cache';
-if (!file_exits($tplCacheDir) {
+if (!file_exists($tplCacheDir)) {
 	mkdir($tplCacheDir, 0777);
 }
 ############### END ################################################################
