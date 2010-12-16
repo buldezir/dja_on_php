@@ -33,4 +33,9 @@ abstract class Dja_Db_Query
      * @param mixed $s
      */
     abstract public function qv($s);
+
+	abstract protected function _connect()
+	{
+		
+	}
 }
